@@ -17,7 +17,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(session({
+  secret: 'your_secret_key_here',  // Replace with a strong, random string
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -26,7 +30,7 @@ app.use(flash());
 app.use("/", require("./routes/index"));
 app.use("/quiz", require("./routes/quiz"));
 app.use("/leaderboard", require("./routes/leaderboard"));
-app.use("/community", require("./routes/community"));
+app.use("/review", require("./routes/review"));
 app.use("/support", require("./routes/support"));
 
 const PORT = process.env.PORT || 3000;

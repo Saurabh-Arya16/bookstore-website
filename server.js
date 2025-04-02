@@ -26,12 +26,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.get('/quiz', (req, res) => {
+  res.render('quiz');  // Don't include ".ejs" here
+});
+
+app.get('support',(req,res)=>{
+  res.render('support');
+});
+
 // Routes
 app.use("/", require("./routes/index"));
 app.use("/quiz", require("./routes/quiz"));
 app.use("/leaderboard", require("./routes/leaderboard"));
 app.use("/review", require("./routes/review"));
 app.use("/support", require("./routes/support"));
+app.use("/login",require("./routes/login"));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

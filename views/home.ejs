@@ -3,18 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Bookstore</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #333;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .books {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .book-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+        .book-card img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-    <ul>
-        <li><a href="/"></a></li>
-        <li><a href="/views/leaderboard.ejs">Leaderboard</a></li>
-        <li><a href="/views/quiz.ejs">Quiz</a></li>
-        <li><a href="/views/support.ejs">Support</a></li>
-        <li><a href="/views/login.ejs">login</a></li>
-
-    </ul>
-    <h1>Bookstore Website</h1>
-    <p>welcome to Bookstorewebsite,a book lovers point</p>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/views/leaderboard.ejs">Leaderboard</a>
+        <a href="/views/quiz.ejs">Quiz</a>
+        <a href="/views/support.ejs">Support</a>
+        <a href="/views/login.ejs">Login</a>
+    </div>
+    
+    <div class="container">
+        <h1>Welcome to Bookstore Website</h1>
+        <p>A paradise for book lovers!</p>
+    </div>
+    
+    <h2 style="text-align:center">Sci-Fi Books</h2>
+    <div class="books">
+        <div class="book-card">
+            <img src="scifi1.jpg" alt="Lord of the Rings">
+            <h3>Lord of the Rings</h3>
+            <p>Price: $500</p>
+        </div>
+        <div class="book-card">
+            <img src="scifi2.jpg" alt="Dune">
+            <h3>Dune</h3>
+            <p>Price: $450</p>
+        </div>
+        <div class="book-card">
+            <img src="scifi3.jpg" alt="Foundation">
+            <h3>Foundation</h3>
+            <p>Price: $400</p>
+        </div>
+    </div>
 </body>
 </html>

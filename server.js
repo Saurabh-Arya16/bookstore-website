@@ -26,13 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.get('/quiz', (req, res) => {
-  res.render('quiz');  // Don't include ".ejs" here
-});
 
-app.get('support',(req,res)=>{
-  res.render('support');
-});
 
 // Routes
 app.use("/", require("./routes/index"));

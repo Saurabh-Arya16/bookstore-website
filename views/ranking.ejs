@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Rankings</title>
+</head>
+<body>
+  <h1>Top Ranked Books</h1>
+  <ul>
+    <% books.forEach((book, index) => { %>
+      <li>
+        <strong><%= index + 1 %>. <%= book.title %></strong> by <%= book.author %> - Popularity: <%= book.popularity %>
+      </li>
+    <% }) %>
+  </ul>
+  <a href="/">Back to Home</a>
+</body>
+</html>

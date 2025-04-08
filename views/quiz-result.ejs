@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Result</title>
+</head>
+<body>
+  <h2>Your Score: <%= score %></h2>
+
+  <% if (recommendedBook) { %>
+    <h3>Recommended Book:</h3>
+    <p><strong>Title:</strong> <%= recommendedBook.title %></p>
+    <p><strong>Author:</strong> <%= recommendedBook.author %></p>
+    <p><%= recommendedBook.description %></p>
+    <p><strong>Price:</strong> ₹<%= recommendedBook.price %></p>
+  <% } else { %>
+    <p>No books to recommend at the moment.</p>
+  <% } %>
+
+  <a href="/">Back to Home</a>
+</body>
+</html>

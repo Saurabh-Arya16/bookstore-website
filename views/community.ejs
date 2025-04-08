@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Community</title>
+</head>
+<body>
+  <h1>📚 Bookstore Community</h1>
+
+  <form action="/community/post" method="POST">
+    <input type="text" name="name" placeholder="Your name" required />
+    <br />
+    <textarea name="message" placeholder="Share your thoughts..." required></textarea>
+    <br />
+    <button type="submit">Post</button>
+  </form>
+
+  <h2>🗨️ Community Posts</h2>
+  <ul>
+    <% posts.forEach(post => { %>
+      <li>
+        <strong><%= post.name %>:</strong>
+        <p><%= post.message %></p>
+        <small><%= post.date.toLocaleString() %></small>
+      </li>
+      <hr />
+    <% }) %>
+  </ul>
+
+  <a href="/">Back to Home</a>
+</body>
+</html>

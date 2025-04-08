@@ -44,6 +44,7 @@ app.use(flash());
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/support'));
+app.use('/', require('./routes/books'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

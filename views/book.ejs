@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookstore - Books</title>
+</head>
+<body>
+  <h2>Available Books</h2>
+
+  <% if (books.length > 0) { %>
+    <ul>
+      <% books.forEach(book => { %>
+        <li>
+          <h3><%= book.title %></h3>
+          <p><strong>Author:</strong> <%= book.author %></p>
+          <p><%= book.description %></p>
+          <p><strong>Price:</strong> ₹<%= book.price %></p>
+          <button>Buy Now</button>
+          <hr>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No books available right now.</p>
+  <% } %>
+</body>
+</html>

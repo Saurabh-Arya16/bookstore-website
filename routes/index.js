@@ -1,6 +1,9 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
+const { ensureAuthenticated } = require('../utils/auth');
 
-router.get('/',(req,res)=>res.render('home'));
+router.get('/', ensureAuthenticated, (req, res) => {
+  res.render('home', { user: req.user });
+});
 
-module.exports=router;
+module.exports = router;

@@ -1,41 +1,49 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const session = require("express-session");
-const passport = require("passport");
-const flash = require("connect-flash");
-const path = require("path");
+const express = require('express');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('connect-flash');
+const path = require('path');
+require('dotenv').config();
 
 const app = express();
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
+// Passport Config
+require('./config/passport')(passport);
+
+// DB Config
+const db = process.env.MONGO_URI || 'mongodb://localhost:27017/bookstore';
+
+// Connect to MongoDB
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-// Middleware
-app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
+// EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
+
+// Express session
 app.use(session({
-  secret: 'your_secret_key_here',  // Replace with a strong, random string
-  resave: false,
-  saveUninitialized: true
+  secret: 'bookstore-secret',
+  resave: true,
+  saveUninitialized: true,
 }));
+
+// Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Connect flash
 app.use(flash());
 
-
-
 // Routes
-app.use("/", require("./routes/index"));
-app.use("/quiz", require("./routes/quiz"));
-app.use("/leaderboard", require("./routes/leaderboard"));
-app.use("/review", require("./routes/review"));
-app.use("/support", require("./routes/support"));
-app.use("/login",require("./routes/login"));
+app.use('/', require('./routes/index'));
+app.use('/', require('./routes/login'));
+app.use('/', require('./routes/support'));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log(`Server started on port ${PORT}`));

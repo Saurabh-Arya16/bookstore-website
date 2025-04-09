@@ -49,12 +49,14 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/support'));
 app.use('/', require('./routes/books'));
-const quizRoutes = require('./routes/quiz');
-app.use('/quiz', quizRoutes);
+app.use('/quiz', require('./routes/quiz'));
 const rankingRoutes = require('./routes/ranking');
 app.use('/ranking', rankingRoutes);
 const communityRoutes = require('./routes/community');
 app.use('/community', communityRoutes);
+const bookRoutes = require('./routes/books');
+app.use('/books', bookRoutes);
+
 
 
 

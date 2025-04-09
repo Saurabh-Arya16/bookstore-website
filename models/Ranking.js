@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 const rankingSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  popularity: Number, // Higher means more popular
+  bookTitle: String,
+  views: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model('Ranking', rankingSchema);

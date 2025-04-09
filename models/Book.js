@@ -6,7 +6,7 @@ const BookSchema = new mongoose.Schema({
   author: String,
   description: String,
   price: Number,
-  level: String // e.g. beginner/intermediate/advanced for future use
+  isAvailable: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Book', BookSchema);

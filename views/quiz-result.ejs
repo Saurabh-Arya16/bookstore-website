@@ -4,98 +4,52 @@
   <title>Quiz Result</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f9ff;
-      padding: 50px 20px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
-    h2 {
-      font-size: 36px;
-      color: #2c3e50;
-      margin-bottom: 20px;
-    }
+h2 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
 
-    h3 {
-      font-size: 24px;
-      color: #1d3557;
-      margin-top: 30px;
-    }
+h3 {
+  font-size: 24px;
+  color: #007bff;
+  background-color: #e6f0ff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
 
-    p {
-      font-size: 16px;
-      color: #444;
-      margin: 8px 0;
-    }
+a {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
 
-    strong {
-      color: #2d3436;
-    }
+a:hover {
+  background-color: #218838;
+}
 
-    .book-card {
-      background-color: #ffffff;
-      border-radius: 12px;
-      padding: 20px 30px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      max-width: 600px;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    a {
-      margin-top: 40px;
-      display: inline-block;
-      text-decoration: none;
-      padding: 12px 24px;
-      background-color: #007BFF;
-      color: white;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    a:hover {
-      background-color: #0056b3;
-    }
-
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 28px;
-      }
-
-      h3 {
-        font-size: 20px;
-      }
-
-      .book-card {
-        padding: 15px 20px;
-      }
-
-      a {
-        font-size: 15px;
-        padding: 10px 20px;
-      }
-    }
   </style>
 </head>
 <body>
-  <h2>Your Score: <%= score %></h2>
-
-  <% if (recommendedBook) { %>
-    <div class="book-card">
-      <h3>Recommended Book:</h3>
-      <p><strong>Title:</strong> <%= recommendedBook.title %></p>
-      <p><strong>Author:</strong> <%= recommendedBook.author %></p>
-      <p><%= recommendedBook.description %></p>
-      <p><strong>Price:</strong> ₹<%= recommendedBook.price %></p>
-    </div>
-  <% } else { %>
-    <p>No books to recommend at the moment.</p>
-  <% } %>
-
-  <a href="/">Back to Home</a>
+  <h2>Your Recommended Book:</h2>
+  <h3><%= recommended %></h3>
+  <a href="/books">Go to Book List</a>
 </body>
 </html>

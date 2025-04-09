@@ -7,18 +7,16 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #e0eafc, #cfdef3);
       margin: 0;
-      padding: 0;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
     }
 
     h2 {
-      margin-bottom: 20px;
       font-size: 32px;
       color: #2c3e50;
+      margin-bottom: 20px;
     }
 
     form {
@@ -28,6 +26,7 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 500px;
+      margin-bottom: 40px;
     }
 
     label {
@@ -83,10 +82,64 @@
     p[style*="color: green"] {
       color: #27ae60;
     }
+
+    .faq-section {
+      width: 100%;
+      max-width: 800px;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section h3 {
+      color: #2c3e50;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-item h4 {
+      font-size: 18px;
+      color: #007BFF;
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 16px;
+      color: #555;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
   <h2>Help & Support</h2>
+  <div class="faq-section">
+    <h3>Frequently Asked Questions (FAQs)</h3>
+
+    <div class="faq-item">
+      <h4>How do I buy a book?</h4>
+      <p>Go to the Books page, select a book, and click on the 'Buy Now' button to proceed to payment.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Can I take a quiz to get recommendations?</h4>
+      <p>Yes, visit the Quiz page and answer a few questions. Based on your answers, we’ll recommend the best book for you!</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>What payment methods are accepted?</h4>
+      <p>We accept credit/debit cards, UPI, and PayPal (if enabled).</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>How can I contact support?</h4>
+      <p>Use the form above to send us a message. We usually respond within 24–48 hours.</p>
+    </div>
+  </div><br><br>
 
   <% if (typeof error !== 'undefined') { %>
     <p style="color: red;"><%= error %></p>
@@ -107,7 +160,7 @@
     <input type="text" name="subject" required>
 
     <label>Message:</label>
-    <textarea name="message" rows="5" required placeholder="enter your message..."></textarea>
+    <textarea name="message" rows="5" required placeholder="Enter your message..."></textarea>
 
     <button type="submit">Submit</button>
   </form>

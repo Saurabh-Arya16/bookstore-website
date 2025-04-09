@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 
 const communitySchema = new mongoose.Schema({
   name: String,
+  email: String,
+  topic: String,
   message: String,
-  date: {
-    type: Date,
-    default: Date.now
+  saved: {
+    type: Boolean,
+    default: false
   }
 });
 

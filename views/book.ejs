@@ -108,21 +108,25 @@ hr {
 <body>
   <h2>Available Books</h2>
 
-  <% if (books.length > 0) { %>
-    <ul>
-      <% books.forEach(book => { %>
-        <li>
-          <img src="<%= book.image %>" alt="<%= book.title %>">
-          <h3><%= book.title %></h3>
-          <p><strong>Author:</strong> <%= book.author %></p>
-          <p><%= book.description %></p>
-          <p><strong>Price:</strong> ₹<%= book.price %></p>
-          <button>Buy Now</button>
-        </li>
-      <% }) %>
-    </ul>
-  <% } else { %>
-    <p>No books available right now.</p>
-  <% } %>
+<% if (books.length > 0) { %>
+  <ul>
+    <% books.forEach(book => { %>
+      <li>
+        <img src="<%= book.image %>" alt="<%= book.title %>" style="width:150px;height:auto;">
+        <h3><%= book.title %></h3>
+        <p><strong>Author:</strong> <%= book.author %></p>
+        <p><%= book.description %></p>
+        <p><strong>Price:</strong> ₹<%= book.price %></p>
+        <% if (book.isAvailable) { %>
+          <form action="/books/buy/<%= book._id %>" method="POST" style="display:inline;">
+            <button type="submit">Buy</button>
+          </form>
+        <% } else { %>
+          <span style="color:red;">(Sold)</span>
+        <% } %>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
 </body>
 </html>

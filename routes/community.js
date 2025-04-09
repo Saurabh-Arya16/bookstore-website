@@ -2,25 +2,29 @@ const express = require('express');
 const router = express.Router();
 const Community = require('../models/Community');
 
-// GET community page
+// View all community posts
 router.get('/', async (req, res) => {
-  try {
-    const posts = await Community.find().sort({ date: -1 });
-    res.render('community', { posts });
-  } catch (err) {
-    res.status(500).send('Error loading community');
-  }
+  const posts = await Community.find({});
+  res.render('community', { posts });
 });
 
-// POST new message
-router.post('/post', async (req, res) => {
-  const { name, message } = req.body;
-  try {
-    await Community.create({ name, message });
-    res.redirect('/community');
-  } catch (err) {
-    res.status(500).send('Error saving message');
-  }
+// Save a post
+router.post('/save/:id', async (req, res) => {
+  await Community.findByIdAndUpdate(req.params.id, { saved: true });
+  res.redirect('/community');
+});
+
+// Delete a post
+router.post('/delete/:id', async (req, res) => {
+  await Community.findByIdAndDelete(req.params.id);
+  res.redirect('/community');
+});
+
+// Add a post
+router.post('/', async (req, res) => {
+  const { name, email, topic, message } = req.body;
+  await Community.create({ name, email, topic, message });
+  res.redirect('/community');
 });
 
 module.exports = router;

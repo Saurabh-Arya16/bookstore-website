@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const questionSchema = new mongoose.Schema({
+const QuestionSchema = new mongoose.Schema({
   question: String,
   options: [String],
-  correctAnswer: Number // index of the correct option
 });
 
-const quizSchema = new mongoose.Schema({
+const QuizSchema = new mongoose.Schema({
   title: String,
-  questions: [questionSchema]
+  questions: [QuestionSchema]
 });
 
-module.exports = mongoose.model('Quiz', quizSchema);
+module.exports = mongoose.model('Quiz', QuizSchema);

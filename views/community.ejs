@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #eaf4ff, #f0f9ff);
+      background: linear-gradient(to right, #f0f2f5, #e8f0ff);
       margin: 0;
       padding: 40px 20px;
       display: flex;
@@ -13,132 +13,152 @@
       align-items: center;
     }
 
-    h1 {
-      font-size: 36px;
+    h2, h3 {
       color: #2c3e50;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
-    form {
+    .post {
       background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .post:hover {
+      transform: scale(1.01);
+    }
+
+    .post h3 {
+      font-size: 18px;
+      color: #34495e;
+      margin-bottom: 10px;
+    }
+
+    .post p {
+      font-size: 15px;
+      color: #555;
+      margin: 6px 0;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .new-post-form {
+      background-color: #ffffff;
       padding: 25px 30px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      max-width: 700px;
       width: 100%;
-      max-width: 500px;
-      margin-bottom: 40px;
+      margin-top: 40px;
     }
 
     input[type="text"],
+    input[type="email"],
     textarea {
       width: 100%;
       padding: 12px 14px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
       transition: border-color 0.3s ease;
     }
 
     input:focus,
     textarea:focus {
-      border-color: #007BFF;
+      border-color: #3498db;
       outline: none;
     }
 
     button {
-      background-color: #007BFF;
-      color: white;
-      padding: 12px 20px;
+      padding: 10px 18px;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 6px;
+      font-size: 15px;
       cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s;
+      transition: background-color 0.2s;
     }
 
-    button:hover {
-      background-color: #0056b3;
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
     }
 
-    h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      color: #34495e;
+    .delete-btn:hover {
+      background-color: #c0392b;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-      max-width: 600px;
+    .save-btn {
+      background-color: #27ae60;
+      color: white;
     }
 
-    li {
-      background-color: #ffffff;
-      padding: 15px 20px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    .save-btn:hover {
+      background-color: #1e8449;
     }
 
-    li strong {
-      color: #2c3e50;
-      font-size: 16px;
+    button[type="submit"]:not(.delete-btn):not(.save-btn) {
+      background-color: #3498db;
+      color: white;
     }
 
-    li p {
-      margin: 8px 0;
-      font-size: 15px;
-      color: #333;
+    button[type="submit"]:hover:not(.delete-btn):not(.save-btn) {
+      background-color: #2980b9;
     }
 
-    li small {
-      color: #888;
-      font-size: 13px;
-    }
-
-    hr {
-      border: 0;
-      height: 1px;
-      background: #e0e0e0;
-      margin: 15px 0;
-    }
-
-    a {
-      margin-top: 20px;
-      font-size: 15px;
-      color: #007BFF;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+    @media (max-width: 600px) {
+      .post, .new-post-form {
+        padding: 20px;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>📚 Bookstore Community</h1>
+  <h2>Community Posts</h2>
 
-  <form action="/community/post" method="POST">
-    <input type="text" name="name" placeholder="Your name" required />
-    <textarea name="message" placeholder="Share your thoughts..." required></textarea>
+  <% posts.forEach(post => { %>
+    <div class="post">
+      <h3><%= post.name %> (<%= post.email %>)</h3>
+      <p><strong>Topic:</strong> <%= post.topic %></p>
+      <p><%= post.message %></p>
+      <p><strong>Status:</strong> <%= post.saved ? 'Saved' : 'Not Saved' %></p>
+
+      <div class="button-group">
+        <!-- Save button -->
+        <form action="/community/save/<%= post._id %>" method="POST">
+          <button class="save-btn" type="submit">Save</button>
+        </form>
+
+        <!-- Delete button -->
+        <form action="/community/delete/<%= post._id %>" method="POST">
+          <button class="delete-btn" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }); %>
+
+  <h3>Add a Post</h3>
+  <form class="new-post-form" action="/community" method="POST">
+    <input type="text" name="name" placeholder="Your name" required><br>
+    <input type="email" name="email" placeholder="Your email" required><br>
+    <input type="text" name="topic" placeholder="Topic" required><br>
+    <textarea name="message" rows="4" placeholder="Your message" required></textarea><br>
     <button type="submit">Post</button>
   </form>
-
-  <h2>🗨️ Community Posts</h2>
-  <ul>
-    <% posts.forEach(post => { %>
-      <li>
-        <strong><%= post.name %>:</strong>
-        <p><%= post.message %></p>
-        <small><%= post.date.toLocaleString() %></small>
-      </li>
-      <hr />
-    <% }) %>
-  </ul>
-
-  <a href="/">⬅ Back to Home</a>
 </body>
 </html>

@@ -1,110 +1,150 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quiz</title>
+  <title><%= quiz.title %></title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f2f7ff;
-      padding: 40px 20px;
+      background-color: #f0f4f8;
       margin: 0;
+      padding: 40px 20px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+    }
+
+    .quiz-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
     h1 {
-      font-size: 32px;
+      text-align: center;
       color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .progress-bar-container {
+      background-color: #e0e0e0;
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
       margin-bottom: 30px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #28a745;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
     }
 
     form {
       width: 100%;
-      max-width: 800px;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
     }
 
-    div {
+    .question-block {
       margin-bottom: 25px;
-      padding: 15px;
-      background-color: #f9fcff;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
     }
 
     p {
-      font-size: 18px;
+      font-size: 17px;
       color: #333;
       margin-bottom: 10px;
     }
 
     label {
       display: block;
+      font-size: 15px;
+      color: #555;
       margin: 6px 0;
-      font-size: 16px;
-      color: #444;
+      cursor: pointer;
     }
 
     input[type="radio"] {
       margin-right: 8px;
+      accent-color: #007bff;
     }
 
     button {
-      background-color: #007BFF;
-      color: white;
+      background-color: #28a745;
+      color: #ffffff;
+      padding: 12px 20px;
       border: none;
-      padding: 14px 28px;
+      border-radius: 8px;
       font-size: 16px;
-      border-radius: 10px;
       cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
+      display: block;
+      margin: 20px auto 0;
       transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #218838;
     }
 
     @media (max-width: 600px) {
-      form {
+      .quiz-container {
         padding: 20px;
       }
 
-      p {
-        font-size: 16px;
-      }
-
-      label {
-        font-size: 15px;
-      }
-
-      button {
-        padding: 12px;
-        font-size: 15px;
+      h1 {
+        font-size: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <h1><%= quiz.title %></h1>
-  <form action="/quiz/submit" method="POST">
-    <% quiz.questions.forEach((q, i) => { %>
-      <div>
-        <p><%= i + 1 %>. <%= q.question %></p>
-        <% q.options.forEach((opt, j) => { %>
-          <label>
-            <input type="radio" name="q<%= i %>" value="<%= j %>" required>
-            <%= opt %>
-          </label>
-        <% }) %>
-      </div>
-    <% }) %>
-    <button type="submit">Submit Quiz</button>
-  </form>
+  <div class="quiz-container">
+    <h1><%= quiz.title %></h1>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+    <form action="/quiz/submit" method="POST" id="quizForm">
+      <% quiz.questions.forEach((q, index) => { %>
+        <div class="question-block">
+          <p><%= q.question %></p>
+          <% q.options.forEach(opt => { %>
+            <label>
+              <input type="radio" name="q<%= index %>" value="<%= opt %>" required>
+              <%= opt %>
+            </label>
+          <% }) %>
+        </div>
+      <% }) %>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- JavaScript for progress bar -->
+  <script>
+    const totalQuestions = <%= quiz.questions.length %>;
+    const form = document.getElementById('quizForm');
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgressBar() {
+      let answered = 0;
+      for (let i = 0; i < totalQuestions; i++) {
+        const radios = form.querySelectorAll(`input[name="q${i}"]`);
+        const answeredOption = Array.from(radios).some(radio => radio.checked);
+        if (answeredOption) answered++;
+      }
+
+      const percent = (answered / totalQuestions) * 100;
+      progressBar.style.width = percent + "%";
+    }
+
+    form.addEventListener('change', updateProgressBar);
+    window.addEventListener('load', updateProgressBar);
+  </script>
 </body>
 </html>

@@ -1,39 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const Quiz = require('../models/Quiz');
-const Book = require('../models/Book');
 
 // Show quiz
 router.get('/', async (req, res) => {
-  const quiz = await Quiz.findOne(); // get the first quiz
+  const quiz = await Quiz.findOne({});
   res.render('quiz', { quiz });
 });
 
 // Handle quiz submission
-router.post('/submit', async (req, res) => {
-  const quiz = await Quiz.findOne();
-  const userAnswers = req.body;
-  let score = 0;
+router.post('/submit', (req, res) => {
+  const answers = Object.values(req.body);
 
-  quiz.questions.forEach((question, index) => {
-    if (parseInt(userAnswers[`q${index}`]) === question.correctAnswer) {
-      score++;
+  const resultMap = {
+    'Maths': 0,
+    'MongoDB': 0,
+    'Node.js': 0,
+    'English': 0,
+    'Computer Science': 0,
+    'Science': 0,
+    'PHP': 0,
+    'SQL': 0,
+    'Harry Potter': 0,
+    'Lord of the Rings': 0,
+    'Invisible Man': 0,
+    'Web Development': 0,
+  };
+
+  answers.forEach(ans => {
+    if (resultMap[ans] !== undefined) {
+      resultMap[ans]++;
     }
   });
 
-  // Recommend a book based on score
-  let recommendedBook;
-  const allBooks = await Book.find();
-
-  if (score >= 4 && allBooks.length >= 3) {
-    recommendedBook = allBooks[2]; // Third book
-  } else if (score >= 2 && allBooks.length >= 2) {
-    recommendedBook = allBooks[1]; // Second book
-  } else if (allBooks.length >= 1) {
-    recommendedBook = allBooks[0]; // First book
-  }
-
-  res.render('quiz-result', { score, recommendedBook });
+  // Get book with highest count
+  const recommended = Object.entries(resultMap).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+  res.render('quiz-result', { recommended });
 });
 
 module.exports = router;

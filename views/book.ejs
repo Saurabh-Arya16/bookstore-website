@@ -3,85 +3,106 @@
 <head>
   <title>Bookstore - Books</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f6f9fc;
-      margin: 0;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f6f9fc;
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    h2 {
-      font-size: 32px;
-      color: #2c3e50;
-      margin-bottom: 30px;
-    }
+h2 {
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      width: 100%;
-      max-width: 900px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
 
-    li {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease;
-    }
+li {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
-    li:hover {
-      transform: translateY(-5px);
-    }
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
 
-    h3 {
-      font-size: 22px;
-      color: #34495e;
-      margin-bottom: 8px;
-    }
+img {
+  width: 100%;
+  max-width: 200px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
-    p {
-      color: #555;
-      font-size: 15px;
-      margin: 8px 0;
-    }
+h3 {
+  font-size: 22px;
+  color: #34495e;
+  margin: 8px 0;
+}
 
-    strong {
-      color: #333;
-    }
+p {
+  color: #555;
+  font-size: 15px;
+  margin: 6px 0;
+}
 
-    button {
-      background-color: #28a745;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 15px;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
-    }
+strong {
+  color: #333;
+}
 
-    button:hover {
-      background-color: #218838;
-    }
+button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
 
-    hr {
-      display: none;
-    }
+button:hover {
+  background-color: #218838;
+}
 
-    @media (max-width: 500px) {
-      body {
-        padding: 20px 10px;
-      }
-    }
+hr {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -91,6 +112,7 @@
     <ul>
       <% books.forEach(book => { %>
         <li>
+          <img src="<%= book.image %>" alt="<%= book.title %>">
           <h3><%= book.title %></h3>
           <p><strong>Author:</strong> <%= book.author %></p>
           <p><%= book.description %></p>

@@ -26,6 +26,9 @@ app.set('views', path.join(__dirname, 'views'));
 // Bodyparser
 app.use(express.urlencoded({ extended: true }));
 
+//public images
+app.use(express.static('public'));
+
 
 // Express session
 app.use(session({

@@ -2,6 +2,93 @@
 <html>
 <head>
   <title>Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f7ff;
+      padding: 40px 20px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 800px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    div {
+      margin-bottom: 25px;
+      padding: 15px;
+      background-color: #f9fcff;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 6px 0;
+      font-size: 16px;
+      color: #444;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      label {
+        font-size: 15px;
+      }
+
+      button {
+        padding: 12px;
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1><%= quiz.title %></h1>
@@ -13,10 +100,9 @@
           <label>
             <input type="radio" name="q<%= i %>" value="<%= j %>" required>
             <%= opt %>
-          </label><br>
+          </label>
         <% }) %>
       </div>
-      <br>
     <% }) %>
     <button type="submit">Submit Quiz</button>
   </form>

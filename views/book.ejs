@@ -2,6 +2,87 @@
 <html>
 <head>
   <title>Bookstore - Books</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f6f9fc;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    li {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    li:hover {
+      transform: translateY(-5px);
+    }
+
+    h3 {
+      font-size: 22px;
+      color: #34495e;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #555;
+      font-size: 15px;
+      margin: 8px 0;
+    }
+
+    strong {
+      color: #333;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    hr {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 20px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h2>Available Books</h2>
@@ -15,7 +96,6 @@
           <p><%= book.description %></p>
           <p><strong>Price:</strong> ₹<%= book.price %></p>
           <button>Buy Now</button>
-          <hr>
         </li>
       <% }) %>
     </ul>

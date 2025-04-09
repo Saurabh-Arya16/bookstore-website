@@ -2,13 +2,111 @@
 <html>
 <head>
   <title>Book Rankings</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f9ff;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    li {
+      background-color: #ffffff;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-size: 18px;
+      color: #34495e;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .medal {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .book-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .rank-details {
+      margin-top: 6px;
+      font-size: 15px;
+      color: #555;
+    }
+
+    a {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #007BFF;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      li {
+        font-size: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .book-info {
+        margin-bottom: 5px;
+      }
+
+      a {
+        font-size: 15px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
   <h1>Top Ranked Books</h1>
   <ul>
-    <% books.forEach((book, index) => { %>
+    <% books.forEach((book, index) => { 
+      let medal = "";
+      if (index === 0) medal = "🥇";
+      else if (index === 1) medal = "🥈";
+      else if (index === 2) medal = "🥉";
+    %>
       <li>
-        <strong><%= index + 1 %>. <%= book.title %></strong> by <%= book.author %> - Popularity: <%= book.popularity %>
+        <div class="book-info">
+          <span class="medal"><%= medal %></span>
+          <strong><%= index + 1 %>. <%= book.title %></strong>
+        </div>
+        <div class="rank-details">
+          by <%= book.author %> &nbsp;|&nbsp; Popularity: <%= book.popularity %>
+        </div>
       </li>
     <% }) %>
   </ul>

@@ -58,63 +58,63 @@ router.get('/seed-books', async (req, res) => {
         image:"lord.jpg",
         title: "Lord of rings",
         author: "J.R.R. Tolkien",
-        description: "A magical journey of Harry Potter.",
+        description: " the journey to destroy the One Ring and defeat the dark lord Sauron in the richly imagined world of Middle-earth.",
         price: 399
       },
       {
         image:"math.jpg",
         title: "Maths",
         author: "R.D. Sharma",
-        description: "Understand MongoDB with real-world examples.",
+        description: "learn mathematics.",
         price: 499
       },
       {
         image:"invisible.jpg",
         title: "invisible man",
         author: "H.G. Wells",
-        description: "Become a backend expert with Node.js.",
+        description: "journey of the scientist",
         price: 599
       },
       {
         image:"cs.jpg",
         title: "Computer Science",
-        author: "J.K. Rowling",
-        description: "A magical journey of Harry Potter.",
+        author: "Bill gates",
+        description: "The future is here.",
         price: 399
       },
       {
         image:"english.jpg",
         title: "English",
         author: "Jane Smith",
-        description: "Understand MongoDB with real-world examples.",
+        description: "The Universal language.",
         price: 499
       },
       {
         image:"php.jpg",
         title: "PHP",
-        author: "Dev Expert",
-        description: "Become a backend expert with Node.js.",
+        author: "SAM",
+        description: "learn php",
         price: 599
       },
       {
         image:"science.jpg",
-        title: "Lord of rings",
-        author: "J.R.R. Tolkien",
-        description: "A magical journey of Harry Potter.",
+        title: "Science",
+        author: "SK chand",
+        description: "learn everything around us.",
         price: 399
       },
       {
         image:"sql.jpg",
-        title: "Maths",
-        author: "R.D. Sharma",
-        description: "Understand MongoDB with real-world examples.",
+        title: "SQL",
+        author: "jake",
+        description: "Create tables through queries.",
         price: 499
       },
       {
         image:"web.jpg",
-        title: "invisible man",
-        author: "H.G. Wells",
-        description: "Become a backend expert with Node.js.",
+        title: "Web",
+        author: "ELon",
+        description: "learn to make websites.",
         price: 599
       }
     ]);

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore=require('connect-mongo');
 const passport = require('passport');
 const flash = require('connect-flash');
 const path = require('path');
@@ -32,9 +33,17 @@ app.use(express.static('public'));
 
 // Express session
 app.use(session({
-  secret: 'bookstore-secret',
-  resave: true,
-  saveUninitialized: true,
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI, // MongoDB connection string
+    collectionName: 'sessions'
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    sameSite: 'lax'
+  }
 }));
 
 // Passport middleware

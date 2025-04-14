@@ -5,6 +5,7 @@ const MongoStore=require('connect-mongo');
 const passport = require('passport');
 const flash = require('connect-flash');
 const path = require('path');
+const Book = require('./models/Book'); // Import your Book model
 require('dotenv').config();
 
 const app = express();
@@ -65,6 +66,101 @@ const communityRoutes = require('./routes/community');
 app.use('/community', communityRoutes);
 const bookRoutes = require('./routes/books');
 app.use('/books', bookRoutes);
+
+// Automatically insert books if none exist
+async function autoSeedBooks() {
+  const count = await Book.countDocuments();
+  if (count === 0) {
+    await Book.insertMany([
+      {
+        image: "harry.jpg",
+        title: "Harry Potter",
+        author: "J.K. Rowling",
+        description: "A magical journey of Harry Potter.",
+        price: 399
+      },
+      {
+        image: "mongo.png",
+        title: "MongoDB in Action",
+        author: "Jane Smith",
+        description: "Understand MongoDB with real-world examples.",
+        price: 499
+      },
+      {
+        image: "node.png",
+        title: "Node.js Mastery",
+        author: "Dev Expert",
+        description: "Become a backend expert with Node.js.",
+        price: 599
+      },
+      {
+        image: "lord.jpg",
+        title: "Lord of rings",
+        author: "J.R.R. Tolkien",
+        description: "The journey to destroy the One Ring and defeat Sauron in Middle-earth.",
+        price: 399
+      },
+      {
+        image: "math.jpg",
+        title: "Maths",
+        author: "R.D. Sharma",
+        description: "Learn mathematics.",
+        price: 499
+      },
+      {
+        image: "invisible.jpg",
+        title: "Invisible Man",
+        author: "H.G. Wells",
+        description: "Journey of the invisible scientist.",
+        price: 599
+      },
+      {
+        image: "cs.jpg",
+        title: "Computer Science",
+        author: "Bill Gates",
+        description: "The future is here.",
+        price: 399
+      },
+      {
+        image: "english.jpg",
+        title: "English",
+        author: "Jane Smith",
+        description: "The universal language.",
+        price: 499
+      },
+      {
+        image: "php.jpg",
+        title: "PHP",
+        author: "SAM",
+        description: "Learn PHP backend scripting.",
+        price: 599
+      },
+      {
+        image: "science.jpg",
+        title: "Science",
+        author: "SK Chand",
+        description: "Explore the natural world.",
+        price: 399
+      },
+      {
+        image: "sql.jpg",
+        title: "SQL",
+        author: "Jake",
+        description: "Create and query databases.",
+        price: 499
+      },
+      {
+        image: "web.jpg",
+        title: "Web",
+        author: "Elon",
+        description: "Learn to build websites.",
+        price: 599
+      }
+    ]);
+    console.log("Books collection auto-seeded.");
+  }
+}
+autoSeedBooks(); // Call it once on server start
 
 
 

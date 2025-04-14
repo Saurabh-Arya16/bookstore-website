@@ -13,7 +13,6 @@ A full-featured online bookstore with quizzes, book recommendations, book rankin
 - 📊 View book popularity ranking
 - 🗣️ Join the community and post messages
 - 📩 Submit help & support queries
-- 🔐 Admin panel to manage books, users, and community posts
 
 ---
 
